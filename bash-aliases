@@ -1,0 +1,14 @@
+alias gl="git log"
+alias gs="git status"
+alias gd="git diff"
+alias gh="git show HEAD"
+alias gln="git log --name-only"
+alias gg="git pull --rebase"
+alias gb="git rev-parse --symbolic-full-name --abbrev-ref HEAD"
+alias gbu='git branch --set-upstream-to=origin/$(gb) $(gb)'
+
+alias lss="ls -la --sort=time"
+
+alias cdiff='code --diff'
+
+alias pysource="source ./venv/bin/activate"

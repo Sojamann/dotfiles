@@ -1,0 +1,20 @@
+#!/bin/bash
+
+THIS="$(readlink -f "$(dirname "$0")")"
+
+assert_installed() {
+    if ! type -P "$1"; then
+        echo "Please install '$1'" >&2
+        exit 1
+    fi
+}
+
+# check requirements
+assert_installed fzf
+assert_installed tmux
+
+file "$HOME/.funcs" && rm -rf "$HOME/.funcs"
+file "$HOME/.tmux.conf" && rm "$HOME/.tmux.conf"
+
+ln -s "$THIS/funcs" "$HOME/.funcs"
+ln -s "$THIS/files/tmux.conf"  "$HOME/.tmux.conf"

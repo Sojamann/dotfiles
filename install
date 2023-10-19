@@ -1,5 +1,9 @@
 #!/bin/bash
 
+set -eu
+set -o pipefail
+set -x
+
 THIS="$(readlink -f "$(dirname "$0")")"
 
 assert_installed() {
@@ -9,13 +13,54 @@ assert_installed() {
     fi
 }
 
+link() {
+    to="$1"
+    target="$2"
+    [[ -L "$target" ]] && return
+    [[ -f "$target" ]] && rm "$target"
+    ln -s "$to" "$target"
+}
+
 # check requirements
 assert_installed fzf
 assert_installed tmux
+assert_installed git
+assert_installed wget
+assert_installed curl
+assert_installed unzip
+assert_installed fc-cache
 
-rm -rf "$HOME/.funcs" || true
-rm "$HOME/.tmux.conf" || true
+# download and "install" fonts
+font_dir="$HOME/.local/share/fonts/nerdfont"
+if ! [[ -d "$font_dir" ]]; then
+    symbols_downloaded="$(mktemp)"
+    font_downloaded="$(mktemp)"
+    mkdir -p "$font_dir"
+    wget -O "$symbols_downloaded" 'https://github.com/ryanoasis/nerd-fonts/releases/download/v3.0.2/NerdFontsSymbolsOnly.zip'
+    wget -O "$font_downloaded" 'https://github.com/ryanoasis/nerd-fonts/releases/download/v3.0.2/FiraCode.zip' 
+    unzip "$symbols_downloaded" '*.ttf' -d "$font_dir"  
+    unzip "$font_downloaded" '*.ttf' -d "$font_dir"  
+    sudo fc-cache -fv
 
-ln -s "$THIS/funcs" "$HOME/.funcs"
-ln -s "$THIS/files/tmux.conf"  "$HOME/.tmux.conf"
+    trap "rm -rf $symbols_downloaded $font_downloaded" EXIT
+fi
 
+if ! type -P starship &>/dev/null; then
+    curl -sS https://starship.rs/install.sh | sh
+    echo 'eval "$(starship init bash)"' >> "$HOME/.bashrc"
+    starship preset bracketed-segments -o ~/.config/starship.toml
+fi
+
+link "$THIS/funcs" "$HOME/.funcs"
+link "$THIS/files/tmux.conf"  "$HOME/.tmux.conf"
+link "$THIS/files/bash-aliases"  "$HOME/.bash-aliases"
+
+# 
+if ! grep -q 'bash-aliases' "$HOME/.bashrc"; then
+    echo 'source "$HOME/.bash-aliases"' >> "$HOME/.bashrc"
+fi
+
+# get the tmux plugin manager
+if ! [[ -d "$HOME/.tmux/plugins/tpm" ]]; then
+    git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+fi

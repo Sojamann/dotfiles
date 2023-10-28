@@ -29,6 +29,7 @@ assert_installed wget
 assert_installed curl
 assert_installed unzip
 assert_installed fc-cache
+assert_installed ripgrep
 
 # download and "install" fonts
 font_dir="$HOME/.local/share/fonts/nerdfont"
@@ -64,3 +65,5 @@ fi
 if ! [[ -d "$HOME/.tmux/plugins/tpm" ]]; then
     git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 fi
+
+# TODO: run tpm install from this script ????

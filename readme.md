@@ -1,3 +1,0 @@
-# ToDo
-[ ] not letting paths point to the installation location but
-    at the same time sym-linking everthing does not make sense ....

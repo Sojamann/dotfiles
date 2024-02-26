@@ -1,8 +1,6 @@
 # TODO
+[ ] find keymap for harpoon as <C-h> is also nice for switching windows
 [ ] Put all keymaps in their respective lua plugin file?
-
-[ ] Harpoon
-[ ] Any other stuff that I used to have in the old config
 
 [ ] Debugging Python
 [ ] Debugging Zig

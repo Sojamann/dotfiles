@@ -1,31 +1,41 @@
-# .bashrc
+
+
+HISTSIZE=10000
+HISTFILESIZE=20000
+HISTCONTROL=ignoreboth
+
+shopt -s histappend
+shopt -s checkwinsize
 
 # Source global definitions
 if [ -f /etc/bashrc ]; then
 	. /etc/bashrc
 fi
 
-# User specific environment
-if ! [[ "$PATH" =~ "$HOME/.local/bin:$HOME/bin:" ]]
-then
-    PATH="$HOME/.local/bin:$HOME/bin:$PATH"
-fi
+
+# ==========================
+# ===       Path         ===
+# ==========================
+pathadd () {
+	case ":${PATH}:" in
+		*:"$1":*)
+			;;
+		*)
+			PATH=$PATH:$1
+			;;
+	esac
+}
+pathadd "$HOME/bin"
+pathadd "$HOME/.local/bin"
+pathadd "$HOME/local/go/bin"
 export PATH
+unset -f pathadd
 
-# User specific aliases and functions
-if [ -d ~/.bashrc.d ]; then
-	for rc in ~/.bashrc.d/*; do
-		if [ -f "$rc" ]; then
-			. "$rc"
-		fi
-	done
-fi
-
-unset rc
 
 # ==========================
 # ===      Aliases       ===
 # ==========================
+# -> git
 alias gl="git log"
 alias gs="git status"
 alias gd="git diff"
@@ -33,12 +43,18 @@ alias gh="git show HEAD"
 alias gg="git pull --rebase"
 alias gb="git rev-parse --symbolic-full-name --abbrev-ref HEAD"
 alias gbu='git branch --set-upstream-to=origin/$(gb) $(gb)'
+# -> ls
 alias lss="ls -la --sort=time"
+# -> python
 alias pysource="source ./venv/bin/activate"
 
 
 # ==========================
 # ===    Tool Setup      ===
 # ==========================
-eval "$(starship init bash)"
+
+type -P starship &>/dev/null && eval "$(starship init bash)"
+type -P helm &>/dev/null && eval "$(helm completion bash)"
+type -P kubectl &>/dev/null && eval "$(kubectl completion bash)"
+
 

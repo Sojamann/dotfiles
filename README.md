@@ -3,12 +3,20 @@
 ## Dependencies
 
 - git
+- make (nvim plugin)
 - stow
 - nvim
 - tmux
-- fzf
-- ripgrep
+- fzf (used by tmux keybindings and nvim telescope)
+- ripgrep (used by nvim telescope)
+- g++ (treesitter want's to compile some stuff)
 - starship
+
+Optional:
+- npm (allows some more language servers for nvim but .... it's a heavy dependency)
+- delve (go debugging)
+- gdb (c/zig debugging)
+- debugpy (python debugging)
 
 ## Install
 

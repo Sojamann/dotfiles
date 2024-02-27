@@ -12,7 +12,7 @@ if not vim.loop.fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
-require("options")
+require("options") -- some general options
+require("keymaps") -- not plugin releated keymaps
 require("lazy").setup("plugins", {})
-require("keymaps") -- keymaps require plugins
 

@@ -36,22 +36,22 @@ return {
         -- Configurations tell the adapter how we want the file to be debugged
         -- see :help dap-configuration
         dap.configurations.python = {
-          {
-            type = 'python';
-            request = 'launch';
-            name = "Launch file";
-            program = function ()
-              local path = vim.fn.input({
-                prompt = 'Path to executable: ',
-                default = vim.fn.expand("%:p"), -- current file
-                completion = 'file'
-              })
-              return (path and path ~= "") and path or dap.ABORT
-            end,
-            pythonPath = function()
-              return vim.cmd("!which python3")
-            end;
-          },
+            {
+                type = 'python',
+                request = 'launch',
+                name = "Launch file",
+                program = function()
+                    local path = vim.fn.input({
+                        prompt = 'Path to executable: ',
+                        default = vim.fn.expand("%:p"), -- current file
+                        completion = 'file'
+                    })
+                    return (path and path ~= "") and path or dap.ABORT
+                end,
+                pythonPath = function()
+                    return vim.cmd("!which python3")
+                end,
+            },
         }
         dap.configurations.c = {
             {
@@ -65,5 +65,13 @@ return {
                 stopAtBeginningOfMainSubprogram = false,
             },
         }
+
+        -- ==================================
+        --            Keymaps
+        -- ==================================
+        vim.keymap.set("n", "<Leader>dt", ":DapToggleBreakpoint<CR>")
+        vim.keymap.set("n", "<Leader>dc", ":DapContinue<CR>")
+        vim.keymap.set("n", "<Leader>dx", ":DapTerminate<CR>")
+        vim.keymap.set("n", "<Leader>do", ":DapStepOver<CR>")
     end,
 }

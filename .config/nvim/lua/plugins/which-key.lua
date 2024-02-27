@@ -1,2 +1,2 @@
--- Useful plugin to show you pending keybinds.
+-- Shows PENDING keybinds
 return { 'folke/which-key.nvim', opts = {} }

@@ -1,7 +1,4 @@
 # TODO
-[ ] find keymap for harpoon as <C-h> is also nice for switching windows
-[ ] Put all keymaps in their respective lua plugin file?
-
 [ ] Debugging Python
 [ ] Debugging Zig
 [ ] Debugging Go

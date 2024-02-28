@@ -41,8 +41,8 @@ return {
             -- dependency and these language servers are nice but not
             -- super important
             if vim.fn.executable('npm') == 1 then
-                lspconfig.pyright.setup({})
-                lspconfig.bashls.setup({})
+                lspconfig.pyright.setup(ls_opt)
+                lspconfig.bashls.setup(ls_opt)
             end
 
 

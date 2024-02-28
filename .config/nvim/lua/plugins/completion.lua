@@ -3,7 +3,10 @@ return {
         "hrsh7th/nvim-cmp",
         dependencies = {
             -- Snippet Engine & its associated nvim-cmp source
-            'L3MON4D3/LuaSnip',
+            {
+                'L3MON4D3/LuaSnip',
+                tag = "v2.*",
+            },
             'saadparwaiz1/cmp_luasnip',
 
             -- Adds LSP completion capabilities

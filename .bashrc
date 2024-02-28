@@ -31,6 +31,11 @@ pathadd "$HOME/local/go/bin"
 export PATH
 unset -f pathadd
 
+# ==========================
+# ===     NVM/Node       ===
+# ==========================
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && source "$NVM_DIR/nvm.sh"
 
 # ==========================
 # ===      Aliases       ===
@@ -56,5 +61,5 @@ alias pysource="source ./venv/bin/activate"
 type -P starship &>/dev/null && eval "$(starship init bash)"
 type -P helm &>/dev/null && eval "$(helm completion bash)"
 type -P kubectl &>/dev/null && eval "$(kubectl completion bash)"
-
+[ -s "$NVM_DIR/bash_completion" ] && source "$NVM_DIR/bash_completion"
 

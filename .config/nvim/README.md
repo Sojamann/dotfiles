@@ -1,7 +1,5 @@
 # TODO
-[ ] Debugging Python
 [ ] Debugging Zig
-[ ] Debugging Go
 
 [ ] Treesitter swapping
 

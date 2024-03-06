@@ -27,7 +27,6 @@ pathadd () {
 }
 pathadd "$HOME/bin"
 pathadd "$HOME/.local/bin"
-pathadd "$HOME/local/go/bin"
 export PATH
 unset -f pathadd
 
@@ -40,22 +39,27 @@ export NVM_DIR="$HOME/.nvm"
 # ==========================
 # ===      Aliases       ===
 # ==========================
+# -> editor
+alias v='nvim'
+alias vd='nvim -d'
 # -> git
-alias gl="git log"
-alias gs="git status"
-alias gd="git diff"
-alias gh="git show HEAD"
-alias gg="git pull --rebase"
-alias gb="git rev-parse --symbolic-full-name --abbrev-ref HEAD"
+alias gl='git log'
+alias gs='git status'
+alias gd='git diff'
+alias gh='git show HEAD'
+alias gg='git pull --rebase'
+alias gb='git rev-parse --symbolic-full-name --abbrev-ref HEAD'
 alias gbu='git branch --set-upstream-to=origin/$(gb) $(gb)'
 # -> ls
-alias lss="ls -la --sort=time"
+alias lss='ls -la --sort=time'
 # -> python
-alias pysource="source ./venv/bin/activate"
-
+alias pysource='source ./venv/bin/activate'
+# -> kubernetes
+alias k='kubectl'
+alias kuse='kubectl config use-context'
 
 # ==========================
-# ===    Tool Setup      ===
+# ===    Completions     ===
 # ==========================
 
 type -P starship &>/dev/null && eval "$(starship init bash)"

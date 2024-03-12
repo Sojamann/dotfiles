@@ -1,6 +1,9 @@
 return {
 
-    -- "gc" to comment visual regions/lines
+    -- "gcc" line comment in normal mode
+    -- "gbc" block comment in normal mode
+    -- "gc" line comment out/in in visual mode
+    -- "gb" block comment out/in in visual mode
     { 'numToStr/Comment.nvim', opts = {} },
     {
         -- Add indentation guides even on blank lines

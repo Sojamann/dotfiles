@@ -68,3 +68,9 @@ type -P helm &>/dev/null && eval "$(helm completion bash)"
 type -P kubectl &>/dev/null && eval "$(kubectl completion bash)"
 [ -s "$NVM_DIR/bash_completion" ] && source "$NVM_DIR/bash_completion"
 
+
+# ==========================
+# ===     Variables      ===
+# ==========================
+export EDITOR=nvim
+

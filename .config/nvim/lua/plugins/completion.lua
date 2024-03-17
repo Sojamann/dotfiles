@@ -3,10 +3,12 @@ return {
         "hrsh7th/nvim-cmp",
         dependencies = {
             'L3MON4D3/LuaSnip', -- configured in luasnip.lua
+            'hrsh7th/cmp-nvim-lsp',
+            'hrsh7th/cmp-buffer',
+            'hrsh7th/cmp-path',
         },
         config = function()
             local cmp = require("cmp")
-
             cmp.setup({
                 snippet = {
                     -- use luasnip to expand the snippets
@@ -33,7 +35,9 @@ return {
                     },
                     {
                         { name = "buffer" },
-                    }),
+                        { name = "path" },
+                    }
+                ),
             })
         end,
     },

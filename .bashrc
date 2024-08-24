@@ -28,6 +28,7 @@ pathadd () {
 pathadd "$HOME/bin"
 pathadd "$HOME/.local/bin"
 pathadd "/usr/local/go/bin"
+pathadd "$HOME/go/bin"
 export PATH
 unset -f pathadd
 

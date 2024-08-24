@@ -8,9 +8,13 @@ return {
             'hrsh7th/cmp-nvim-lua',
             'hrsh7th/cmp-nvim-lsp',
             'saadparwaiz1/cmp_luasnip',
+            'zbirenbaum/copilot-cmp',
+            'onsails/lspkind.nvim'
         },
         config = function()
             local cmp = require("cmp")
+            local lspkind = require('lspkind')
+
             cmp.setup({
                 snippet = {
                     expand = function(args)
@@ -30,13 +34,29 @@ return {
                     ['<C-y>'] = cmp.mapping.confirm({ select = true }),
                 }),
                 sources = {
+                    { name = "copilot", group_index = 2 },
                     { name = "nvim_lua" },
                     { name = "nvim_lsp" },
                     { name = "path" },
                     { name = "luasnip" },
                     { name = "buffer", keyword_length = 5 },
                 },
+                formatting = {
+                    format = lspkind.cmp_format({
+                      mode = "symbol",
+                      max_width = 50,
+                      symbol_map = { Copilot = "" }
+                    })
+                }
             })
         end,
     },
+    {
+        'zbirenbaum/copilot-cmp',
+        config = function()
+            require("copilot_cmp").setup({
+                fix_pairs = true,
+            })
+        end
+    }
 }

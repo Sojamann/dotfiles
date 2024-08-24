@@ -22,6 +22,7 @@ return {
                         ['<C-d>'] = false,
                     },
                 },
+                file_ignore_patterns = { "venv" }
             },
             pickers = {
                 find_files = {
